@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lumishome — Conciergerie Airbnb à Casablanca</title>
+  <meta name="description" content="Lumishome, conciergerie chaleureuse à Casablanca. Gestion complète Airbnb: check-in/out, ménage, linge, maintenance, optimisation des revenus. Obtenez une estimation gratuite." />
+  <style>
+    :root{
+      --bg: #fbf6ee;          /* sable */
+      --card: #ffffff;
+      --text: #1f2937;        /* ardoise */
+      --muted:#6b7280;
+      --accent:#c45a3a;       /* terracotta */
+      --accent2:#2f6f5e;      /* vert olive */
+      --accent3:#e9c46a;      /* soleil */
+      --ring: rgba(196,90,58,.25);
+      --shadow: 0 14px 40px rgba(17,24,39,.10);
+      --radius: 18px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1000px 500px at 10% 0%, rgba(233,196,106,.35), transparent 60%),
+        radial-gradient(900px 450px at 90% 10%, rgba(47,111,94,.18), transparent 60%),
+        var(--bg);
+      line-height:1.5;
+    }
+    a{color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:22px}
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:14px;padding:10px 0;
+    }
+    .brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      box-shadow: 0 10px 25px rgba(196,90,58,.22);
+      position:relative;overflow:hidden;
+    }
+    .logo:after{
+      content:"";position:absolute;inset:-20px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 55%);
+      transform:rotate(15deg);
+    }
+    .brand strong{letter-spacing:.2px}
+    .navlinks{display:flex;gap:16px;flex-wrap:wrap}
+    .navlinks a{font-size:14px;color:var(--muted);text-decoration:none}
+    .navlinks a:hover{color:var(--text)}
+    .btn{
+      border:0;cursor:pointer;text-decoration:none;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 16px;border-radius:999px;font-weight:700;
+      background: var(--accent);color:#fff;
+      box-shadow: 0 12px 28px rgba(196,90,58,.28);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px);filter:saturate(1.06)}
+    .btn:active{transform:translateY(0px);box-shadow: 0 10px 20px rgba(196,90,58,.22)}
+    .btn.secondary{
+      background:#fff;color:var(--text);
+      box-shadow: 0 10px 26px rgba(17,24,39,.10);
+      border:1px solid rgba(31,41,55,.10);
+    }
+
+    .hero{
+      display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:stretch;
+      padding:18px 0 6px;
+    }
+    .heroCard{
+      background: rgba(255,255,255,.65);
+      border:1px solid rgba(31,41,55,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:22px;
+      backdrop-filter: blur(8px);
+    }
+    .tag{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:13px;color:#1f2937;
+      padding:7px 10px;border-radius:999px;
+      background: rgba(233,196,106,.35);
+      border:1px solid rgba(233,196,106,.55);
+    }
+    h1{font-size:42px;line-height:1.1;margin:14px 0 10px}
+    .sub{color:var(--muted);font-size:16px;margin:0 0 16px}
+    .heroActions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+    .bullets{
+      display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px
+    }
+    .bullet{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 12px;border-radius:14px;background: rgba(255,255,255,.75);
+      border:1px solid rgba(31,41,55,.08);
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: var(--accent2);margin-top:5px;flex:0 0 auto;
+      box-shadow: 0 0 0 6px rgba(47,111,94,.12);
+    }
+
+    /* Lead form card */
+    .formTitle{margin:0 0 6px;font-size:18px}
+    .formSub{margin:0 0 16px;color:var(--muted);font-size:14px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    label{font-size:12px;color:var(--muted)}
+    input, select, textarea{
+      width:100%;padding:12px 12px;border-radius:14px;
+      border:1px solid rgba(31,41,55,.12);
+      background:#fff;outline:none;
+      transition: box-shadow .12s ease, border-color .12s ease;
+      font-size:14px;
+    }
+    textarea{min-height:92px;resize:vertical}
+    input:focus, select:focus, textarea:focus{
+      border-color: rgba(196,90,58,.55);
+      box-shadow: 0 0 0 6px var(--ring);
+    }
+    .small{font-size:12px;color:var(--muted);margin:10px 0 0}
+    .divider{height:1px;background:rgba(31,41,55,.08);margin:18px 0}
+
+    /* Sections */
+    section{padding:28px 0}
+    .sectionTitle{font-size:26px;margin:0 0 12px}
+    .sectionSub{color:var(--muted);margin:0 0 18px}
+    .cards{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:14px
+    }
+    .card{
+      background: rgba(255,255,255,.75);
+      border:1px solid rgba(31,41,55,.08);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 25px rgba(17,24,39,.08);
+      padding:16px;
+    }
+    .card h3{margin:8px 0 6px;font-size:16px}
+    .card p{margin:0;color:var(--muted);font-size:14px}
+    .icon{
+      width:38px;height:38px;border-radius:14px;
+      display:grid;place-items:center;
+      background: rgba(196,90,58,.10);
+      border: 1px solid rgba(196,90,58,.18);
+      color: var(--accent);
+      font-weight:900;
+    }
+
+    /* Pricing */
+    .pricing{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:14px
+    }
+    .price{
+      font-size:32px;font-weight:900;margin:10px 0 2px
+    }
+    .unit{font-size:12px;color:var(--muted)}
+    ul{padding-left:18px;margin:10px 0 0;color:var(--muted);font-size:14px}
+    li{margin:6px 0}
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;font-weight:800;
+      padding:6px 10px;border-radius:999px;
+      background: rgba(47,111,94,.12);
+      border:1px solid rgba(47,111,94,.22);
+      color: var(--accent2);
+    }
+    .highlight{
+      border:2px solid rgba(196,90,58,.45);
+      box-shadow: 0 18px 45px rgba(196,90,58,.16);
+      background: rgba(255,255,255,.85);
+    }
+
+    /* FAQ */
+    details{
+      background: rgba(255,255,255,.75);
+      border:1px solid rgba(31,41,55,.08);
+      border-radius: 16px;
+      padding:12px 14px;
+    }
+    details + details{margin-top:10px}
+    summary{cursor:pointer;font-weight:800}
+    details p{margin:8px 0 0;color:var(--muted);font-size:14px}
+
+    /* Footer */
+    footer{padding:24px 0 40px;color:var(--muted);font-size:13px}
+    .footerRow{display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap}
+    .pill{
+      display:inline-flex;gap:10px;align-items:center;
+      padding:10px 12px;border-radius:999px;
+      background: rgba(255,255,255,.65);
+      border:1px solid rgba(31,41,55,.08);
+    }
+
+    /* WhatsApp floating */
+    .wa{
+      position:fixed;right:18px;bottom:18px;z-index:50;
+      background: #25D366;color:#fff;border-radius:999px;
+      padding:12px 14px;font-weight:900;text-decoration:none;
+      box-shadow: 0 16px 34px rgba(0,0,0,.18);
+      display:flex;align-items:center;gap:10px;
+    }
+    .wa span{font-size:14px}
+    .wa i{font-style:normal;font-weight:900}
+
+    /* Responsive */
+    @media (max-width: 960px){
+      .hero{grid-template-columns:1fr}
+      .cards,.pricing{grid-template-columns:1fr}
+      h1{font-size:36px}
+      .bullets{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .navlinks{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header class="nav">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <strong>Lumishome</strong><br/>
+          <span style="font-size:12px;color:var(--muted)">Conciergerie • Casablanca</span>
+        </div>
+      </a>
+
+      <nav class="navlinks" aria-label="Navigation">
+        <a href="#services">Services</a>
+        <a href="#process">Comment ça marche</a>
+        <a href="#pricing">Tarifs</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <a class="btn" href="#lead">Obtenir une estimation</a>
+    </header>
+
+    <main id="top" class="hero">
+      <!-- Left hero -->
+      <div class="heroCard">
+        <span class="tag">🏝️ Gestion chaleureuse & sérieuse • Airbnb & location</span>
+        <h1>Ta location à Casablanca,<br/>gérée <span style="color:var(--accent)">comme un hôtel</span> — sans le stress.</h1>
+        <p class="sub">
+          Lumishome s’occupe de tout : check-in/out, ménage & linge, maintenance, messages voyageurs,
+          optimisation des prix. Toi, tu encaisses.
+        </p>
+
+        <div class="heroActions">
+          <a class="btn" href="#lead">Estimation gratuite en 60 sec</a>
+          <a class="btn secondary" id="btnWhatsAppTop" href="#">WhatsApp direct</a>
+        </div>
+
+        <div class="bullets" aria-label="Points clés">
+          <div class="bullet"><div class="dot"></div><div><strong>+ de sérénité</strong><br><span style="color:var(--muted)">Gestion 24/7 + voyageurs contents.</span></div></div>
+          <div class="bullet"><div class="dot"></div><div><strong>Meilleure note</strong><br><span style="color:var(--muted)">Propreté & accueil calibrés.</span></div></div>
+          <div class="bullet"><div class="dot"></div><div><strong>Revenus optimisés</strong><br><span style="color:var(--muted)">Tarification dynamique.</span></div></div>
+          <div class="bullet"><div class="dot"></div><div><strong>Casablanca</strong><br><span style="color:var(--muted)">Interventions rapides sur place.</span></div></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <span class="pill">🧼 Ménage & linge</span>
+          <span class="pill">🔑 Check-in/out</span>
+          <span class="pill">🛠️ Maintenance</span>
+          <span class="pill">💬 Messages voyageurs</span>
+          <span class="pill">📈 Optimisation prix</span>
+        </div>
+      </div>
+
+      <!-- Right lead form -->
+      <aside class="heroCard" id="lead">
+        <h2 class="formTitle">Recevoir une proposition Lumishome</h2>
+        <p class="formSub">On te répond rapidement avec une estimation + un plan d’action.</p>
+
+        <form id="leadForm">
+          <div class="grid2">
+            <div>
+              <label for="name">Nom</label>
+              <input id="name" name="name" placeholder="Ex: Nayle" required />
+            </div>
+            <div>
+              <label for="phone">Téléphone / WhatsApp</label>
+              <input id="phone" name="phone" placeholder="Ex: +212 6XX XX XX XX" required />
+            </div>
+          </div>
+
+          <div class="grid2" style="margin-top:10px">
+            <div>
+              <label for="type">Type de bien</label>
+              <select id="type" name="type" required>
+                <option value="" disabled selected>Choisir…</option>
+                <option>Studio</option>
+                <option>Appartement</option>
+                <option>Maison</option>
+                <option>Immeuble / plusieurs lots</option>
+              </select>
+            </div>
+            <div>
+              <label for="area">Quartier (optionnel)</label>
+              <input id="area" name="area" placeholder="Ex: Gauthier, Ain Diab…" />
+            </div>
+          </div>
+
+          <div style="margin-top:10px">
+            <label for="goal">Ton objectif</label>
+            <select id="goal" name="goal" required>
+              <option value="" disabled selected>Choisir…</option>
+              <option>Je veux déléguer 100%</option>
+              <option>Je veux augmenter mes revenus</option>
+              <option>Je veux améliorer la note & les avis</option>
+              <option>Je démarre (nouveau logement)</option>
+            </select>
+          </div>
+
+          <div style="margin-top:10px">
+            <label for="msg">Détails (liens annonce, contraintes, etc.)</label>
+            <textarea id="msg" name="msg" placeholder="Ex: lien Airbnb, dates bloquées, fréquence de séjour…"></textarea>
+          </div>
+
+          <button class="btn" style="width:100%;margin-top:12px" type="submit">
+            Envoyer ma demande
+          </button>
+
+          <p class="small">
+            En envoyant, tu acceptes d’être recontacté par Lumishome (WhatsApp / appel).
+          </p>
+        </form>
+
+        <div class="divider"></div>
+
+        <div>
+          <span class="badge">Offre lancement</span>
+          <p style="margin:10px 0 0;color:var(--muted);font-size:14px">
+            Tarifs pensés pour être <strong>compétitifs à Casablanca</strong> : la gestion complète tourne souvent autour de <strong>15–20%</strong> selon services.  [oai_citation:1‡atlasvillasmarrakech.com](https://atlasvillasmarrakech.com/tarif-conciergerie-airbnb-au-maroc/?utm_source=chatgpt.com)
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Services -->
+    <section id="services">
+      <h2 class="sectionTitle">Ce qu’on gère pour toi</h2>
+      <p class="sectionSub">La base “Airbnb” + le sérieux d’une gestion long-terme si tu veux.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🔑</div>
+          <h3>Check-in / Check-out</h3>
+          <p>Remise des clés, état des lieux rapide, consignes claires, accueil chaleureux.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧼</div>
+          <h3>Ménage & linge</h3>
+          <p>Standard pro : lits faits, linge propre, consommables, contrôle qualité.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🛠️</div>
+          <h3>Maintenance réactive</h3>
+          <p>Petits travaux, interventions urgentes, coordination artisans si besoin.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💬</div>
+          <h3>Messages voyageurs</h3>
+          <p>Réponses rapides, consignes, assistance, gestion des imprévus.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📈</div>
+          <h3>Optimisation des revenus</h3>
+          <p>Prix dynamiques, calendrier, stratégies week-end / événements, etc.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>Reporting simple</h3>
+          <p>Récap mensuel : revenus, taux d’occupation, points à améliorer.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process">
+      <h2 class="sectionTitle">Comment ça marche</h2>
+      <p class="sectionSub">Simple, rapide, sans blabla.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">1</div>
+          <h3>Estimation & appel</h3>
+          <p>Tu envoies ton logement + tes objectifs. On te propose une formule.</p>
+        </div>
+        <div class="card">
+          <div class="icon">2</div>
+          <h3>Mise en place</h3>
+          <p>On prépare le standard (photos si besoin, guide, stock, process).</p>
+        </div>
+        <div class="card">
+          <div class="icon">3</div>
+          <h3>Gestion au quotidien</h3>
+          <p>Réservations, voyageurs, ménage, maintenance. Toi, tu suis les chiffres.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+      <h2 class="sectionTitle">Tarifs Lumishome (Casablanca)</h2>
+      <p class="sectionSub">
+        Modèle à la commission (aligné marché). À Casablanca, on voit souvent <strong>15–20%</strong> en gestion complète,
+        et beaucoup d’acteurs démarrent à <strong>20%</strong>.  [oai_citation:2‡atlasvillasmarrakech.com](https://atlasvillasmarrakech.com/tarif-conciergerie-airbnb-au-maroc/?utm_source=chatgpt.com)
+      </p>
+
+      <div class="pricing">
+        <div class="card">
+          <span class="badge">Essentiel</span>
+          <div class="price">15%</div>
+          <div class="unit">des revenus locatifs • offre lancement</div>
+          <ul>
+            <li>Check-in/out</li>
+            <li>Messages voyageurs</li>
+            <li>Coordination ménage*</li>
+            <li>Support incidents (horaires étendus)</li>
+          </ul>
+          <div style="margin-top:14px">
+            <a class="btn secondary" href="#lead">Demander Essentiel</a>
+          </div>
+        </div>
+
+        <div class="card highlight">
+          <span class="badge">Le plus choisi</span>
+          <div class="price">18%</div>
+          <div class="unit">des revenus locatifs • gestion complète</div>
+          <ul>
+            <li>Tout Essentiel</li>
+            <li>Ménage & linge (process + contrôle qualité)</li>
+            <li>Optimisation des prix</li>
+            <li>Maintenance rapide (coordination)</li>
+            <li>Reporting mensuel</li>
+          </ul>
+          <div style="margin-top:14px">
+            <a class="btn" href="#lead">Demander une estimation</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <span class="badge">Premium</span>
+          <div class="price">20%</div>
+          <div class="unit">des revenus locatifs • sérénité max</div>
+          <ul>
+            <li>Tout Gestion complète</li>
+            <li>Assistance 24/7</li>
+            <li>Priorité interventions</li>
+            <li>Audit optimisation (annonce + photos**)</li>
+          </ul>
+          <div style="margin-top:14px">
+            <a class="btn secondary" href="#lead">Parler Premium</a>
+          </div>
+        </div>
+      </div>
+
+      <p class="small" style="margin-top:12px">
+        * Ménage/linge peuvent être facturés au voyageur via frais de ménage selon plateformes & choix propriétaire.  
+        ** Photos pro sur devis si nécessaire.
+      </p>
+    </section>
+
+    <!-- Social proof -->
+    <section>
+      <h2 class="sectionTitle">Ce que les proprios veulent (et ce qu’on délivre)</h2>
+      <p class="sectionSub">Tu peux remplacer ces cartes par tes vrais témoignages dès que tu en as 2–3.</p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>“Je ne gère plus rien”</h3>
+          <p>Clés, voyageurs, imprévus… tout est pris en charge. Je reçois juste le reporting.</p>
+        </div>
+        <div class="card">
+          <h3>“Enfin une propreté stable”</h3>
+          <p>Les avis ont arrêté de parler du ménage. C’était le point qui détruisait la note.</p>
+        </div>
+        <div class="card">
+          <h3>“Revenus mieux optimisés”</h3>
+          <p>Calendrier et prix ajustés : moins de trous, meilleure valeur par nuit.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2 class="sectionTitle">FAQ</h2>
+      <p class="sectionSub">Les questions qu’on te posera (et qu’on te posera encore).</p>
+
+      <details>
+        <summary>Vous prenez combien de commission ?</summary>
+        <p>
+          À Casablanca, la gestion complète est souvent autour de 15–20% selon le niveau de service. 
+          Lumishome se place compétitif avec 15% (lancement), 18% (complet) et 20% (premium).  [oai_citation:3‡atlasvillasmarrakech.com](https://atlasvillasmarrakech.com/tarif-conciergerie-airbnb-au-maroc/?utm_source=chatgpt.com)
+        </p>
+      </details>
+
+      <details>
+        <summary>Vous gérez aussi les propriétaires “hors Airbnb” ?</summary>
+        <p>Oui. On peut faire une gestion plus “classique” (visites, maintenance, coordination) selon ton besoin.</p>
+      </details>
+
+      <details>
+        <summary>Qui paye le ménage et le linge ?</summary>
+        <p>Souvent c’est intégré aux frais de ménage payés par le voyageur (selon la plateforme et ta stratégie). On met en place le meilleur modèle pour ton bien.</p>
+      </details>
+
+      <details>
+        <summary>Vous pouvez améliorer ma note ?</summary>
+        <p>Oui, si les fondamentaux (propreté, check-in, communication) sont maîtrisés. C’est exactement là où on met le standard.</p>
+      </details>
+    </section>
+
+    <!-- Final CTA -->
+    <section>
+      <div class="heroCard" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
+        <div>
+          <h2 style="margin:0 0 6px">Prêt à déléguer ton bien à Casablanca ?</h2>
+          <p style="margin:0;color:var(--muted)">Estimation gratuite + proposition en fonction de ton logement.</p>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <a class="btn" href="#lead">Lancer l’estimation</a>
+          <a class="btn secondary" id="btnWhatsAppBottom" href="#">WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footerRow">
+        <div>
+          <div class="pill">© <span id="year"></span> Lumishome • Casablanca</div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <span class="pill">📍 Casablanca</span>
+          <span class="pill">⏱️ Réponse rapide</span>
+          <span class="pill">🌿 Style chaleureux</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- WhatsApp Floating Button -->
+  <a class="wa" id="waFloat" href="#" aria-label="WhatsApp Lumishome">
+    <i>🟢</i><span>WhatsApp Lumishome</span>
+  </a>
+
+  <script>
+    // ==== CONFIG (mets tes infos ici) ====
+    const WHATSAPP_NUMBER = "+212600000000"; // TODO: remplace par ton numéro (format international)
+    const BUSINESS_EMAIL = "contact@lumishome.ma"; // optionnel, si tu veux utiliser mailto
+    const DEFAULT_CITY = "Casablanca";
+
+    // Build WhatsApp link with a prefilled message
+    function waLink(prefill){
+      const n = WHATSAPP_NUMBER.replace(/[^\d]/g,'');
+      const text = encodeURIComponent(prefill);
+      return `https://wa.me/${n}?text=${text}`;
+    }
+
+    const topBtn = document.getElementById("btnWhatsAppTop");
+    const bottomBtn = document.getElementById("btnWhatsAppBottom");
+    const floatBtn = document.getElementById("waFloat");
+
+    function setAllWhatsAppLinks(){
+      const msg = `Salam, je veux une estimation Lumishome pour mon logement à ${DEFAULT_CITY}.`;
+      const link = waLink(msg);
+      topBtn.href = link;
+      bottomBtn.href = link;
+      floatBtn.href = link;
+      topBtn.target = bottomBtn.target = floatBtn.target = "_blank";
+      topBtn.rel = bottomBtn.rel = floatBtn.rel = "noopener";
+    }
+    setAllWhatsAppLinks();
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Lead form -> open WhatsApp with structured message (lead gen)
+    const form = document.getElementById("leadForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+
+      const name = (data.get("name") || "").trim();
+      const phone = (data.get("phone") || "").trim();
+      const type = (data.get("type") || "").trim();
+      const area = (data.get("area") || "").trim();
+      const goal = (data.get("goal") || "").trim();
+      const msg = (data.get("msg") || "").trim();
+
+      const prefill =
+`Salam Lumishome 👋
+Je veux une estimation pour mon bien à Casablanca.
+
+• Nom: ${name}
+• Tel/WhatsApp: ${phone}
+• Type de bien: ${type}
+• Quartier: ${area || "—"}
+• Objectif: ${goal}
+• Détails: ${msg || "—"}
+
+Merci 🙏`;
+
+      window.open(waLink(prefill), "_blank", "noopener");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
